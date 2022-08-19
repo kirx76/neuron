@@ -2,7 +2,7 @@ import random
 
 import pygame
 
-from game.GameObject import GameObject
+from GameObject import GameObject
 from game.TextObject import TextObject
 from game.ball import Ball
 from game.config import default_ball_size, max_score

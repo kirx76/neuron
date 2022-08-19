@@ -1,7 +1,7 @@
 import pygame
 from pygame.rect import Rect
 
-from game.GameObject import GameObject
+from GameObject import GameObject
 from game.config import height
 
 

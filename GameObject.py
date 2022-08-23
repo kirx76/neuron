@@ -50,7 +50,7 @@ class GameObject:
         self.bounds = self.bounds.move(dx, dy)
 
     def get_distance_to(self, other, surface):
-        line = pygame.draw.line(surface, (0, 0, 0), self.center, other.center)
+        line = pygame.draw.line(surface, (100, 0, 0), self.center, other.center)
         return line.h
 
     def update(self):

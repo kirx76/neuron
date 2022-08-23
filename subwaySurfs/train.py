@@ -11,7 +11,7 @@ train_speed = (0, 2)
 
 def get_random_train_height():
     return 150
-    return random.randint(100, 200)
+    # return random.randint(100, 200)
 
 
 class Train(GameObject):
@@ -29,6 +29,6 @@ class Train(GameObject):
         pygame.draw.rect(surface, self.color, self.bounds)
 
     def update(self):
-        GameObject.update(self)
         if self.bounds.y >= self.game_height - 50:
             self.destroyed = True
+        GameObject.update(self)

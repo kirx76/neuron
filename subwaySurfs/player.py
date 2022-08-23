@@ -34,12 +34,14 @@ class Player(GameObject):
         for train in self.trains:
             if train.destroyed:
                 self.trains.remove(train)
+                self.genome.fitness += 0.33
             else:
                 train.update()
 
     def update_trains_collision(self):
         for train in self.trains:
             if self.bounds.colliderect(train.bounds):
+                self.genome.fitness -= 1
                 self.destroy()
 
     def draw_trains(self):
@@ -50,7 +52,7 @@ class Player(GameObject):
         self.create_train()
 
     def create_random_train(self):
-        train = Train(self.surface, self.game_width, self.game_height, random.randint(1, 3) * self.game_width // 3,
+        train = Train(self.surface, self.game_width, self.game_height, random.randint(0, 2) * self.game_width // 3,
                       self.color)
         self.add_train(train)
 
@@ -88,7 +90,7 @@ class Player(GameObject):
         if array_sum < 1:
             array[0] = 1
             random.shuffle(array)
-        print(array)
+        # print(array)
 
         for index, i in enumerate(array):
             if i == 1:
@@ -201,7 +203,6 @@ class Player(GameObject):
         pos = self.net.activate(
             (self.pos, ctd, ct.centery if ct is not None else 0, ct.centerx if ct is not None else -1))
 
-        print(pos)
         if pos[0] < -0.25:
             self.pos = -1
         elif -0.25 <= pos[0] <= 0.25:
@@ -211,13 +212,13 @@ class Player(GameObject):
 
         if self.pos < -0.25:
             self.bounds.x = (self.game_width // 3) / 2 - (player_height / 2)
-            self.genome.fitness -= 0.1
+            # self.genome.fitness -= 0.1
         elif -0.25 <= self.pos <= 0.25:
             self.bounds.x = (self.game_width // 2) - (player_height / 2)
-            self.genome.fitness -= 0.1
+            # self.genome.fitness -= 0.1
         elif self.pos > 0.25:
             self.bounds.x = self.game_width - 100 - player_height / 2
-            self.genome.fitness -= 0.1
+            # self.genome.fitness -= 0.1
 
     def update(self):
         self.update_trains_collision()
